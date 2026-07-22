@@ -64,6 +64,62 @@ public class Array2{
             }
                System.out.println(ms);   
         }
+
+    // trapping rainwater question 
+    
+    public static int rainwater(int a[]){
+
+      // setting the left max boundary for each bar 
+
+      int n = a.length;
+      int leftmax [] = new int [n];
+      leftmax[0] = a[0];
+      for(int i = 1; i<n; i++){
+        leftmax[i] = Math.max(leftmax[i-1],a[i]);
+      }
+
+      // setting the right max boundary for each bar 
+      
+      int rightmax [] = new int [n];
+      rightmax[n-1] = a[n-1];
+      for (int i = n-2 ; i>=0; i--){
+         rightmax[i] = Math.max(rightmax[i+1],a[i]);
+       }
+      
+     // the area  of the water trapped will be :  waterlevel - height of each bar 
+     // and waterlevel = minimum of the two boundaries left and right 
+
+      int trappedwater = 0;
+      for (int i=0; i<n; i++){
+         int waterlevel = Math.min(leftmax[i],rightmax[i]);
+         trappedwater += waterlevel -  a[i];
+      }
+      return trappedwater;
+    }
+
+    // buy sell stock question
+   
+   public static int buysellstockProfit(int a[]){
+    int maxp = 0;
+    int bp  = a[0];
+     for(int i =1; i<a.length; i++){
+      if(a[i]<=bp){
+        bp = a[i];
+      }
+      else{
+        if((a[i]-bp)>maxp){
+           maxp  = a[i]-bp;
+        }
+      }
+      }
+      
+     
+     if(maxp<0){
+        return  -1;
+      }
+      return maxp;
+   }
+
        
 
     
